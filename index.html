@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Auth System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- AUTH CARD (LOGIN / CREATE ACCOUNT) -->
+    <div id="authContainer" class="card">
+      
+      <!-- LOGIN FORM -->
+      <form id="loginForm" class="auth-form">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Enter your credentials to sign in</p>
+        
+        <div class="input-group">
+          <label>Username</label>
+          <input type="text" id="loginUsername" required placeholder="Enter username" />
+        </div>
+        
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" required placeholder="Enter password" />
+        </div>
+        
+        <div id="loginError" class="error-text"></div>
+        
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        
+        <div class="auth-toggle">
+          <span>Doesn't have an account?</span>
+          <a href="#" id="showSignup">Create one</a>
+        </div>
+      </form>
+
+      <!-- CREATE ACCOUNT FORM -->
+      <form id="signupForm" class="auth-form hidden">
+        <h2>Create Account</h2>
+        <p class="subtitle">Join us in seconds</p>
+        
+        <div class="input-group">
+          <label>Username</label>
+          <input type="text" id="signupUsername" required placeholder="Choose username" />
+          <div id="usernameError" class="error-text"></div>
+        </div>
+
+        <div class="input-group">
+          <label>Nickname</label>
+          <input type="text" id="signupNickname" required placeholder="Your display name" />
+        </div>
+        
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="signupPassword" required placeholder="Choose password" />
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Create Account</button>
+        
+        <div class="auth-toggle">
+          <span>Already have an account?</span>
+          <a href="#" id="showLogin">Sign In</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- DASHBOARD CARD (LOGGED IN VIEW) -->
+    <div id="dashboardContainer" class="card card-wide hidden">
+      <header class="dashboard-header">
+        <div class="user-welcome">
+          <h2>Welcome, <span id="displayUsername"></span>!</h2>
+          <span id="adminBadge" class="badge hidden">Admin</span>
+        </div>
+        
+        <div class="header-actions">
+          <button id="switchAccountBtn" class="btn btn-icon" title="Switch Account">
+            <i class="fa-solid +"><span class="plus-icon">+</span></i> Switch
+          </button>
+          <button id="logoutBtn" class="btn btn-secondary">
+            <i class="fa-solid fa-right-from-bracket"></i> Log Out
+          </button>
+        </div>
+      </header>
+
+      <main class="dashboard-body">
+        
+        <!-- PROFILE EDIT SECTION (NORMAL + ADMIN USERS) -->
+        <section class="panel">
+          <h3>Edit Profile</h3>
+          <form id="editProfileForm">
+            <div class="input-group">
+              <label>Username</label>
+              <input type="text" id="editUsername" required />
+              <div id="editUsernameError" class="error-text"></div>
+            </div>
+
+            <div class="input-group">
+              <label>Nickname</label>
+              <input type="text" id="editNickname" required />
+            </div>
+
+            <div class="input-group">
+              <label>Old Password</label>
+              <input type="password" id="oldPassword" placeholder="Enter old password to update" />
+            </div>
+
+            <div class="input-group">
+              <label>New Password</label>
+              <input type="password" id="newPassword" placeholder="Enter new password" />
+            </div>
+
+            <div id="profileMsg" class="success-text"></div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </section>
+
+        <!-- ADMIN PANEL SECTION (ONLY VISIBLE TO ADMIN) -->
+        <section id="adminPanel" class="panel hidden">
+          <h3>User Management (Admin Console)</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Nickname</th>
+                  <th>Password</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="userTableBody">
+                <!-- Dynamically populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
